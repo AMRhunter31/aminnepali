@@ -12,7 +12,7 @@
        
  <meta name="author" content="" />
       
-  <title>Amin Nepali Official Website</title>
+  <title>aminnepali official site</title>
      
    <!-- Favicon-->
        
@@ -37,6 +37,16 @@
     <!-- Core theme CSS (includes Bootstrap)-->
    
      <link href="css/styles.css" rel="stylesheet" />
+
+     <style>
+      .circle-image {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        overflow: hidden;
+      }
+    </style>
+     
   
   </head>
   
@@ -57,12 +67,17 @@
     <!-- Masthead-->
   
       <header class="masthead bg-primary text-white text-center">
+        <div class="gcse-search"></div>
+
   
           <div class="container d-flex align-items-center flex-column">
     
             <!-- Masthead Avatar Image-->
        
-         <img class="masthead-avatar mb-5" src="amin.jpg" alt="..." />
+            
+            
+            <img src="amin.jpg" alt="Your Image" class="circle-image">
+            
      
           <!-- Masthead Heading-->
         
@@ -70,11 +85,11 @@
           
       <!-- Masthead Subheading-->
      
-          <p class="masthead-subheading font-weight-light mb-0">Bachelor Student (second semester)</p>
-         
+          <p class="masthead-subheading font-weight-light mb-0">Bachelor Student</p><br>
+         <p class="masthead-subheading font-weight-light mb-0">BICTE Sukuna Multiple Campus</p>
        <nav>
                                 
-     <a href="http://facebook.com/i.am.aminnepali"><i class="fab fa-facebook-f"></i></a>
+     <a href="http://facebook.com/i.am.aminnepali"><i class="fab fa-facebook-f"></i></a><a href="https://github.com/AMRhunter31/aminnepali"><img id="githuub" height="15px" width="15px" src="assets/github.png"></a>
  
                  
 
@@ -90,8 +105,8 @@
    
      <div class="copyright py-4 text-center text-white">
        
-     <div class="container"><small>Copyright &copy; 2023 Amin Nepali. contact: +9779811003628, aminnepali7@gmail.com </small></div>
-      
+     <div class="container"><small>Copyright &copy; 2023 Amin Nepali </small></div><br>
+      <div class="container"><small>  contact: +9779811003628 aminnepali7@gmail.com </small></div>
   </div>
    
     <!-- Bootstrap core JS-->
@@ -101,7 +116,18 @@
         <script src="js/scripts.js"></script>
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js">
 </script>
+<!-- Load Facebook SDK for JavaScript -->
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v9.0&appId=your-app-id&autoLogAppEvents=1"></script>
+
+<!-- Add the plugin code -->
+<div class="fb-customerchat"
+  attribution=setup_tool
+  page_id="your-page-id">
+</div>
+
  
    </body>
 
 </html>
+
