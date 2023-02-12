@@ -15,7 +15,7 @@ email_error.innerHTML = "Incorrect Email";
 email.focus();
 return false;
 }
-if (password.value !== "12345678") {
+if (password.value !== "aminnepali") {
 password.style.border = "1px solid red";
 pass_error.style.display = "block";
 pass_error.innerHTML = "Incorrect Password";
@@ -34,7 +34,7 @@ return true;
 }
 
 function pass_Verify() {
-if (password.value === "12345678") {
+if (password.value === "aminnepali") {
 password.style.border = "1px solid silver";
 pass_error.style.display = "none";
 return true;
