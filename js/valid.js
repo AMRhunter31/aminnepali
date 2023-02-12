@@ -22,7 +22,7 @@ pass_error.innerHTML = "Incorrect Password";
 password.focus();
 return false;
 }
-window.location.href = "nextpage.html";
+window.location.href = "home.html";
 }
 
 function email_Verify() {
