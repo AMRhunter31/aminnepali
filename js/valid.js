@@ -22,7 +22,7 @@ pass_error.innerHTML = "Password milena maya";
 password.focus();
 return false;
 }
-window.location.href = "home.html";
+window.location.href = "assets/home.html";
 }
 
 function email_Verify() {
