@@ -3,23 +3,26 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Real-Time Video Chat</title>
+    <title>GitHub Pages Chat</title>
     <style>
-      #local-video {
-        width: 300px;
-        height: 200px;
+      #chat-box {
+        width: 500px;
+        height: 500px;
+        border: 1px solid black;
       }
-      #remote-video {
-        width: 300px;
-        height: 200px;
+      .message {
+        padding: 10px;
+        margin-bottom: 10px;
+        border-bottom: 1px solid gray;
       }
     </style>
   </head>
   <body>
-    <div>
-      <video id="local-video" autoplay></video>
-      <video id="remote-video" autoplay></video>
-    </div>
+    <div id="chat-box"></div>
+    <form id="chat-form">
+      <input type="text" id="chat-input" />
+      <button type="submit">Send</button>
+    </form>
   </body>
   <script src="app.js"></script>
 </html>
