@@ -1,40 +1,25 @@
 
+
 <!DOCTYPE html>
 <html>
   <head>
+    <title>Real-Time Video Chat</title>
     <style>
-      .file-list {
-        list-style: none;
-        padding: 0;
-        margin: 0;
+      #local-video {
+        width: 300px;
+        height: 200px;
       }
-
-      .file-list li {
-        margin: 10px 0;
-      }
-
-      .file-list a {
-        display: inline-block;
-        padding: 10px 20px;
-        background-color: lightgray;
-        color: black;
-        text-decoration: none;
-        border-radius: 5px;
+      #remote-video {
+        width: 300px;
+        height: 200px;
       }
     </style>
   </head>
   <body>
-    <h2>Files in Directory:</h2>
-    <ul class="file-list">
-      <?php
-        $dir = "files/";
-        $files = scandir($dir);
-        foreach($files as $file) {
-          if ($file != "." && $file != "..") {
-            echo "<li><a href='".$dir.$file."' download>".$file."</a></li>";
-          }
-        }
-      ?>
-    </ul>
+    <div>
+      <video id="local-video" autoplay></video>
+      <video id="remote-video" autoplay></video>
+    </div>
   </body>
+  <script src="app.js"></script>
 </html>
