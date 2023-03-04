@@ -1,223 +1,219 @@
+
+		
+
+		.
+			
+
+			
+
 <!DOCTYPE html>
 
 <html>
 
-<head>
+  <head>
 
-	<meta charset="utf-8">	<title>Amin Nepali</title>
+    <title>Amin Nepali | Profile</title>
 
-	<style>
+    <style>
 
-		body {
+      /* Style for body element */
 
-			background-color: #f8f8f8;
+      body {
 
-			font-family: Arial, sans-serif;
+        margin: 0;
 
-			margin: 0;
+        padding: 0;
 
-			padding: 0;
+        font-family: Arial, sans-serif;
 
-		}
+        background-color: #f1f1f1;
 
-		header {
+      }
 
-			background-color: #007bff;
+      
 
-			color: #fff;
+      /* Style for header element */
 
-			padding: 20px;
+      header {
 
-			text-align: center;
+        background-color: #333;
 
-		}
+        color: #fff;
 
-		h1 {
+        text-align: center;
 
-			font-size: 48px;
+        padding: 20px;
 
-			margin: 0;
+        font-size: 30px;
 
-		}
+      }
 
-		h2 {
+      
 
-			font-size: 24px;
+      /* Style for profile picture */
 
-			margin: 0;
+      .profile-pic {
 
-		}
+        width: 200px;
 
-		.profile-image {
+        height: 200px;
 
-			border-radius: 50%;
+        border-radius: 50%;
 
-			height: 200px;
+        margin: 20px auto;
 
-			margin: 50px auto;
+        display: block;
 
-			overflow: hidden;
+        background-image: url(assets/amin.jpg);
 
-			position: relative;
+        background-size: cover;
 
-			width: 200px;
+        background-position: center;
 
-		}
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 
-		.profile-image:before {
+      }
 
-			content: "";
+      
 
-			background-image: url("assets/amin.jpg");
+      /* Style for name */
 
-			background-size: cover;
+      .name {
 
-			background-position: center;
+        text-align: center;
 
-			border-radius: 50%;
+        font-size: 28px;
 
-			filter: blur(10px);
+        font-weight: bold;
 
-			height: 200px;
+        margin: 20px 0;
 
-			left: -25px;
+      }
 
-			position: absolute;
+      
 
-			top: -25px;
+      /* Style for links */
 
-			width: 200px;
+      .links {
 
-			z-index: -1;
+        text-align: center;
 
-		}
+        margin: 20px 0;
 
-		.profile-image img {
+      }
 
-			border-radius: 50%;
+      
 
-			height: 200px;
+      .links a {
 
-			position: relative;
+        display: inline-block;
 
-			transform: rotateY(45deg) rotateX(-20deg);
+        margin: 0 10px;
 
-			width: 200px;
+        color: #333;
 
-		}
+        background-color: #fff;
 
-		.container {
+        border-radius: 20px;
 
-			margin: 0 auto;
+        padding: 10px 20px;
 
-			max-width: 800px;
+        text-decoration: none;
 
-			padding: 50px;
+        transition: all 0.3s ease;
 
-			text-align: center;
+      }
 
-		}
+      
 
-		.bio {
+      .links a:hover {
 
-			font-size: 18px;
+        color: #fff;
 
-			line-height: 1.5;
+        background-color: #333;
 
-			margin: 50px 0;
+      }
 
-		}
+      
 
-		.skills {
+      /* Style for bio section */
 
-			margin: 50px 0;
+      .bio {
 
-			text-align: left;
+        max-width: 600px;
 
-		}
+        margin: 0 auto;
 
-		.skills ul {
+        padding: 20px;
 
-			list-style: none;
+        background-color: #fff;
 
-			margin: 0;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 
-			padding: 0;
+      }
 
-		}
+      
 
-		.skills li {
+      .bio h2 {
 
-			margin: 10px 0;
+        font-size: 24px;
 
-		}
+        margin: 0 0 10px;
 
-		.skills li:before {
+      }
 
-			content: "• ";
+      
 
-			color: #007bff;
+      .bio p {
 
-		}
+        font-size: 16px;
 
-	</style>
+        line-height: 1.5;
 
-</head>
+        margin: 0;
 
-<body>
+      }
 
-	<header>
+    </style>
 
-		<h1>Amin Nepali</h1>
+  </head>
 
-		<h2>Web Developer</h2>
+  
 
-	</header>
+  <body>
 
-	<div class="container">
+    
 
-		<div class="profile-image">
+    
 
-			<img src="assets/amin.jpg" alt="Amin Nepali">
+    <div class="profile-pic"></div>
 
-		</div>
+    
 
-		<div class="bio">
+    <div class="name">Amin Nepali</div>
 
-			<p>Hi, I'm Amin Nepali, a web developer with a passion for creating beautiful and functional websites. I specialize in HTML, CSS, and JavaScript, and have experience working with frameworks such as React and Angular. In my free time, I enjoy hiking, photography, and learning new things.</p>
+    
 
-		</div>
+    <div class="links">
 
-		<div class="skills">
+      <a href="https://facebook.com/i.am.aminnepali" target="_blank">Facebook</a>
 
-			<h3>Skills</h3>
+      <a href="https://github.com/AMRhunter31/aminnepali" target="_blank">GitHub</a>
 
-			<ul>
+    </div>
 
-				<li>HTML</li>
+    
 
-				<li>CSS</li>
+    <div class="bio">
 
-				<li>JavaScript</li>
+      <h2>About Me</h2>
 
-				<li>React</li>
+      <p>Hi, I'm Amin Nepali. I'm a passionate web developer with 3 years of experience in HTML, CSS, and JavaScript. I specialize in creating responsive and user-friendly websites that are both aesthetically pleasing and functional.</p>
 
-				<li>Angular</li>
+      <p>When I'm not coding, I enjoy playing video games, reading books, and traveling. I'm always looking for new challenges and opportunities to learn and grow as a developer.</p>
 
-				<li>Node.js</li>
+    </div>
 
-				<li>SQL</li>
+  </body>
 
-				<li>Git</li>
-
-			</ul>
-           </div>
-          </div>
-           
-
-		
-
-</body>
 </html>
-
-
