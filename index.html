@@ -1,28 +1,222 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>login form </title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-    <div class="container">
-        <h1 class="label">User Login</h1>
-        <form class="login_form" action="home.html" method="post"  name="form">
-            
-            <div class="font">Email or Phone number</div>
-            <input autocomplete="off"  type="text" name="email">
-            <div id="email_error">please fill up your email or phone number.</div>
-            <div class="font2">Password</div>
-            <input type="password" name="password">
-            <div id="pass_error">please fill up your password.</div>
 
-            <button  type="submit">login</button>
-        </form>
-    </div>
-    <script src="js/valid.js"></script>
+<html>
+
+<head>
+
+	<meta charset="utf-8">	<title>Amin Nepali</title>
+
+	<style>
+
+		body {
+
+			background-color: #f8f8f8;
+
+			font-family: Arial, sans-serif;
+
+			margin: 0;
+
+			padding: 0;
+
+		}
+
+		header {
+
+			background-color: #007bff;
+
+			color: #fff;
+
+			padding: 20px;
+
+			text-align: center;
+
+		}
+
+		h1 {
+
+			font-size: 48px;
+
+			margin: 0;
+
+		}
+
+		h2 {
+
+			font-size: 24px;
+
+			margin: 0;
+
+		}
+
+		.profile-image {
+
+			border-radius: 50%;
+
+			height: 200px;
+
+			margin: 50px auto;
+
+			overflow: hidden;
+
+			position: relative;
+
+			width: 200px;
+
+		}
+
+		.profile-image:before {
+
+			content: "";
+
+			background-image: url("assets/amin.jpg");
+
+			background-size: cover;
+
+			background-position: center;
+
+			border-radius: 50%;
+
+			filter: blur(10px);
+
+			height: 200px;
+
+			left: -25px;
+
+			position: absolute;
+
+			top: -25px;
+
+			width: 200px;
+
+			z-index: -1;
+
+		}
+
+		.profile-image img {
+
+			border-radius: 50%;
+
+			height: 200px;
+
+			position: relative;
+
+			transform: rotateY(45deg) rotateX(-20deg);
+
+			width: 200px;
+
+		}
+
+		.container {
+
+			margin: 0 auto;
+
+			max-width: 800px;
+
+			padding: 50px;
+
+			text-align: center;
+
+		}
+
+		.bio {
+
+			font-size: 18px;
+
+			line-height: 1.5;
+
+			margin: 50px 0;
+
+		}
+
+		.skills {
+
+			margin: 50px 0;
+
+			text-align: left;
+
+		}
+
+		.skills ul {
+
+			list-style: none;
+
+			margin: 0;
+
+			padding: 0;
+
+		}
+
+		.skills li {
+
+			margin: 10px 0;
+
+		}
+
+		.skills li:before {
+
+			content: "• ";
+
+			color: #007bff;
+
+		}
+
+	</style>
+
+</head>
+
+<body>
+
+	<header>
+
+		<h1>Amin Nepali</h1>
+
+		<h2>Web Developer</h2>
+
+	</header>
+
+	<div class="container">
+
+		<div class="profile-image">
+
+			<img src="assets/amin.jpg" alt="Amin Nepali">
+
+		</div>
+
+		<div class="bio">
+
+			<p>Hi, I'm Amin Nepali, a web developer with a passion for creating beautiful and functional websites. I specialize in HTML, CSS, and JavaScript, and have experience working with frameworks such as React and Angular. In my free time, I enjoy hiking, photography, and learning new things.</p>
+
+		</div>
+
+		<div class="skills">
+
+			<h3>Skills</h3>
+
+			<ul>
+
+				<li>HTML</li>
+
+				<li>CSS</li>
+
+				<li>JavaScript</li>
+
+				<li>React</li>
+
+				<li>Angular</li>
+
+				<li>Node.js</li>
+
+				<li>SQL</li>
+
+				<li>Git</li>
+
+			</ul>
+           </div>
+          </div>
+           
+
+		
+
 </body>
 </html>
 
