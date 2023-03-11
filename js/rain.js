@@ -23,6 +23,7 @@ for (let i = 0; i < numCols; i++) {
 
 // Define the function to update the canvas
 function update() {
+  
   // Clear the canvas
   ctx.fillStyle = "rgba(0, 0, 0, 0.04)";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -44,12 +45,12 @@ function update() {
     ctx.fillText(char, x, y);
 
     // Increment the y position of the raindrop
-    drops[i]++;
+drops[i] += 0.5; // change the value to 0.5 or 0.2 to slow down the speed
 
-    // Reset the y position of the raindrop if it goes off the screen
-    if (drops[i] * colSize > canvas.height / 2 && Math.random() > 0.95) {
-      drops[i] = 0;
-    }
+// Reset the y position of the raindrop if it goes off the screen
+if (drops[i] * colSize > canvas.height / 2 && Math.random() > 0.95) {
+  drops[i] = 0;
+}
   }
 
   // Request another animation frame
