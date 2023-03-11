@@ -1,0 +1,120 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.github{
+  background-color: antiquewhite;
+}
+#login-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+#login-container h2 {
+  margin-top: 0;
+}
+
+#login-form div {
+  margin-bottom: 10px;
+}
+
+#login-form label {
+  display: inline-block;
+  width: 80px;
+  text-align: right;
+  margin-right: 10px;
+}
+
+#login-form input[type="text"],
+#login-form input[type="password"] {
+  width: 200px;
+  padding: 5px;
+  border-radius: 5px;
+  border: none;
+}
+
+#login-form button[type="submit"] {
+  background-color: #4CAF50;
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+
+
+
+#login-form button[type="submit"]:hover {
+  background-color: #3e8e41;
+}
+
+#profile-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+
+
+  /* Add styles to the profile image */
+  .profile-image {
+    display: block;
+    margin: 0 auto;
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border: 5px solid #fff;
+    box-shadow: 0px 0px 20px #888;
+  }
+  
+  /* Add styles to the profile information */
+  h1 {
+    text-align: center;
+    font-size: 2em;
+    margin-top: 20px;
+  }
+  
+  p {
+    text-align: justify;
+    padding: 20px;
+    font-size: 1.2em;
+    line-height: 1.5em;
+  }
+  
+  /* Add styles to the Facebook button */
+  a {
+    display: block;
+    margin: 0 auto;
+    width: 100px;
+    height: 30px;
+    background-color: #3b5998;
+    color: #fff;
+    text-align: center;
+    line-height: 30px;
+    border-radius: 5px;
+    margin-top: 20px;
+    text-decoration: none;
+  }
+  
