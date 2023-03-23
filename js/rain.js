@@ -80,7 +80,7 @@ loginForm.addEventListener("submit", (event) => {
     profileContainer.style.display = "block";
   } else {
     // Display an error message
-    alert("Incorrect username or password. Please try again.");
+    alert("के गरेकाे माया ? मिलेन त आईडी र पासवर्ड । फेरि हाल मिल्ने गरी ।");
   }
 });
 
