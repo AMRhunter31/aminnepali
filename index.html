@@ -1,45 +1,301 @@
 <!DOCTYPE html>
+
 <html>
+
 <head>
-  <title>Profile Page</title>
-  <style>
-    .profile-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+
+	<title>Amin Nepali's CV</title>	<style>
+
+		/* Style for the CV */
+
+		body {
+
+			font-family: Arial, sans-serif;
+
+			margin: 0;
+
+			padding: 0;
+
+			background-color: #f2f2f2;
+
+		}
+
+    .bio0 {
+
+		margin-top: 30px;
+
+		border-top: 1px solid #ccc;
+
+		padding-top: 20px;
+
+	}
+
+	.bio0 h2 {
+
+		margin-top: 0;
+
     }
 
-    .profile-image {
-      width: 200px;
-      height: 200px;
-      object-fit: cover;
-      border-radius: 50%;
-      margin-bottom: 16px;
+	.container0 {
+
+		max-width: 800px;
+
+		margin: 20px auto;
+
+		background-color: #fff;
+
+		padding: 20px;
+
+		box-shadow: 0px 0px 10px #888888;
+
+	}
+
+	h1 {
+
+		font-size: 36px;
+
+		margin-bottom: 10px;
+
+		color: #333;
+
+		text-align: center;
+
+	}
+
+	h2 {
+
+		font-size: 24px;
+
+		margin-bottom: 10px;
+
+		color: #333;
+
+	}
+
+	p {
+
+		font-size: 18px;
+
+		margin: 10px 0;
+
+		color: #666;
+
+	}
+
+	.skills0 {
+
+		margin-top: 30px;
+
+		border-top: 1px solid #ccc;
+
+		padding-top: 20px;
+
+	}
+
+	.skills0 h2 {
+
+		margin-top: 0;
+
+	}
+
+	.education0 {
+
+		margin-top: 30px;
+
+		border-top: 1px solid #ccc;
+
+		padding-top: 20px;
+
+	}
+
+	.education0 h2 {
+
+		margin-top: 0;
+
+	}
+
+	.table0 {
+
+		border-collapse: collapse;
+
+		width: 100%;
+
+	}
+
+	th, td {
+
+		padding: 10px;
+
+		text-align: left;
+
+		border-bottom: 1px solid #ccc;
+
+	}
+
+	th {
+
+		background-color: #f2f2f2;
+
+		font-weight: bold;
+
+		color: #333;
+
+		border-top: 1px solid #ccc;
+
+		border-bottom: 1px solid #ccc;
+
+	}
+
+    .download-btn {
+
+        display: inline-block;
+
+        background-color: #4CAF50;
+
+        color: white;
+
+        padding: 12px 20px;
+
+        margin-top: 30px;
+
+        border: none;
+
+        border-radius: 4px;
+
+        cursor: pointer;
+
+        font-size: 16px;
+
+        text-decoration: none;
+
     }
 
-    .upload-button {
-      padding: 8px 16px;
-      border-radius: 4px;
-      background-color: #007bff;
-      color: white;
-      font-size: 16px;
-      cursor: pointer;
+    .download-btn:hover {
+
+        background-color: #45a049;
+
     }
-  </style>
+
+</style>
+
 </head>
+
 <body>
-  <div class="profile-container">
-    <?php
-    // Check if the profile picture exists
-    $profilePicture = 'assets/ameen.jpg';
-    if (file_exists($profilePicture)) {
-      echo '<img class="profile-image" src="' . $profilePicture . '" alt="Profile Picture">';
-    }
-    ?>
-    <form action="upload.php" method="post" enctype="multipart/form-data">
-      <input type="file" name="file">
-      <button type="submit" class="upload-button">Upload Picture</button>
-    </form>
-  </div>
+
+	<div class="container0" id="cv-container">
+
+		<h1>Amin Nepali</h1>
+
+		<h2>Personal Information</h2>
+
+		<p><strong>Address:</strong> Belbari-09, Morang</p>
+
+		<p><strong>Phone:</strong> +9779811003628</p>
+
+		<p><strong>Email:</strong> aminnepali7@gmail.com</p>
+
+		<div class="skills0">
+
+			<h2>Skills</h2>
+
+			<ul>
+
+				<li>Basic computer skills (Microsoft Office, browsing, etc.)</li>
+
+				<li>Operator computer skills (data entry, typing, etc.)</li>
+
+			</ul>
+
+		</div>
+
+<div class="bio0">
+
+<h2>Bio</h2>
+
+<p>I am a second-semester BICTE student at Sukuna Multiple Campus in Morang. I have basic and operator computer skills and completed my high school from Bhagawati Higher Secondary School, Belbari 3, Morang in the management section. I am passionate about technology and enjoy learning about new developments in the field.</p>
+
+</div>
+
+<div class="education0">
+
+<h2>Education</h2>
+
+<table class="table0">
+
+<tr>
+
+<th>Level of Education</th>
+
+<th>Institution</th>
+
+<th>Board/University</th>
+
+<th>Year</th>
+
+</tr>
+
+<tr>
+
+<td>Intermediate</td>
+
+<td>Bhagawati Higher Secondary School</td>
+
+<td>NEB</td>
+
+<td>2019</td>
+
+</tr>
+
+<tr>
+
+<td>Bachelor of ICT in Education (BICTE)</td>
+
+<td>Sukuna Multiple Campus</td>
+
+<td>TU</td>
+
+<td>2024 (expected)</td>
+
+</tr>
+
+</table>
+
+</div>
+
+<div>
+
+<button id="download_cv">CV Download</button>	
+
+</div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+
+<script>
+
+const downloadBtn = document.getElementById('download_cv');
+
+const cvContainer = document.getElementById('cv-container');
+
+downloadBtn.addEventListener('click', () => {
+
+  const cvContent = cvContainer.innerHTML;
+
+  const fileName = 'Amin Nepali CV.pdf';
+
+  const pdf = new jsPDF();
+
+  pdf.fromHTML(cvContent, 15, 15, {}, function() {
+
+    pdf.save(amin.pdf);
+
+  });
+
+});
+
+</script>
+
 </body>
-</html>
+
+</html
