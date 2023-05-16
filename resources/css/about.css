@@ -184,7 +184,7 @@ html {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: url("../img/bg1.png") no-repeat right bottom;
+    background: url("../img/portfolios/bg01.png") no-repeat right bottom;
     background-size: contain;
 }
 
