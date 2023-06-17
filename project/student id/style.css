@@ -1,0 +1,63 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: rgb(236, 215, 167);
+  }
+  
+  .search-container {
+    margin-top: 50px;
+  }
+  
+  .search-container input[type=text] {
+    padding: 10px;
+    width: 250px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  .search-container button {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #92a8ee;
+    color: rgb(199, 223, 155);
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .student-card {
+    background-color: rgb(140, 224, 248);
+    border-radius: 50%;
+    border: 2px solid yellow;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 50px;
+  }
+  
+  .student-card img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border: 2px solid yellow;
+    margin-right: 50px;
+  }
+  
+  .student-card .details {
+    text-align: left;
+    margin-bottom: 20px;
+    align-content: center;
+    
+    text-align: center;
+  }
+
+  img{
+    border-radius: 50%;
+  }
+
+  
+  .student-card .details p {
+    margin: 5px;
+  }
