@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Recovery</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="wrapper">
+        <section>
+            <h1>
+                Code?
+            </h1>
+            <div class="input-box">
+                <input type="text" required name="code" placeholder="Enter the recovery code."  >
+            </div>
+            <div style="display: flex;"></div>
+            <div class="remember-forgot">
+                <div class="remember-forgot" style="padding-top: 10px;"><a href="forget.html" style="color: rgb(32, 31, 31);"><button class="btn" style="background: transparent; border: 3px solid green; width: 110px;" >Go back</button></a></div>
+                
+                
+                <div class="remember-forgot" style="padding-top: 10px;"><button class="btn" style="background: transparent; border: 3px solid green; width: 110px;" onclick="recover()">Verify</button></div>
+                
+               
+            </div>
+            </div>
+            <script>
+                function recover(){
+                    alert("Account recovered successfully. Please check your email.");
+                    window.location.assign('../index.html');
+                }
+            </script>
+           
+
+        </section>
+    </div>
+</body>
+</html>
