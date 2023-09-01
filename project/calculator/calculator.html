@@ -3,108 +3,210 @@
 <head>
     <title>Simple Calculator</title>
     <style>
-        .calculator {
-            width: 220px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            padding: 10px;
-            background-color: #f9f9f9;
-            margin: 0 auto;
-            text-align: center;
-        }
-        .calculator input {
-            width: 100%;
-            margin-bottom: 10px;
-            padding: 5px;
-            font-size: 18px;
-        }
-        .calculator button {
-            width: 20%;
-            padding: 5px;
-            font-size: 18px;
-            margin-bottom: 5px;
-            border-radius: 5px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-        .calculator button:hover {
-            background-color: #45a049;
-        }
-        .calculator button.operator {
-            background-color: #008CBA;
-        }
-        .calculator button.operator:hover {
-            background-color: #006080;
-        }
-        .clear{
-            background-color: aqua;
-        }
-        .bgdiv{
-            background-color: rgb(22, 151, 202);
-            margin: 70px;
-            border: 2px solid green;
-            border-radius: 10%;
-        }
-        .calculator{
-            text-align: left;
-        }
-        
+body {
+  padding-top: 30px;
+  background-color: lightblue;
+  font-family: 'Play', serif;
+  font-size: 18px;
+  background: url(https://s20.postimg.org/tzp5916a5/macbook.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.btn-danger {
+  background-color: #887C7B;
+  border-color: #343436;
+  width: 65px;
+  height: 55px;
+  font-size: 1.25em;
+}
+
+.rectangle {
+  width: 315px;
+  height: 450px;
+  border: 25px solid #1a1a1a;
+  border-radius: 35px;
+  box-shadow: 10px 10px 20px 10px;
+  padding-top: 0px;
+  background-color: #1a1a1a;
+}
+
+.col-xs-3 {
+  padding-left: 1px;
+}
+
+.col-xs-12 {
+  padding-left: 0px;
+}
+
+.screenInput {
+  width: 265px;
+  height: 61px;
+  background-color: #ffff80;
+  border-color: #1a1a1a;
+  border-radius: 10px;
+  font-size: 1.5em;
+  text-align: right;
+}
+
+.copyright {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  border: 1px;
+}
+
+.gist {
+  background-color: #99ccff;
+  border: 5px solid #1a1a1a;
+  border-radius: 10px;
+  padding: 10px;
+}
     </style>
 </head>
 <body>
-    <div class="bgdiv" style="width: fit-content;">
-        <center>
-    <h1 class="textdiv">
-        [ Portable version of calculator ]
-    </h1>
-</center>
-    <div class="calculator" style="width: 200px;">
-        <h2>NIMA</h2>
-        <input style="width: 180px;" type="text" id="result" readonly>
-        <div>
-            <button onclick="appendToResult('7')">7</button>
-            <button onclick="appendToResult('8')">8</button>
-            <button onclick="appendToResult('9')">9</button>
-            <button class="operator" onclick="appendToResult('/')">/</button>
+    <div class="container">
+
+  <div class="row">
+    <div class="col-xs-4 paddit"></div>
+    <div class="col-xs-4 rectangle" id="calciBody">
+      <div class="row">
+        <div class="col-xs-12 "><input id="screenInput" type="text" class="screenInput" id="screen" name="screens" readOnly></input>
         </div>
-        <div>
-            <button onclick="appendToResult('4')">4</button>
-            <button onclick="appendToResult('5')">5</button>
-            <button onclick="appendToResult('6')">6</button>
-            <button class="operator" onclick="appendToResult('*')">*</button>
+      </div>
+      <div class="row ">
+        <div class="col-xs-12 copyright">
+          <table align="center">
+            <tr>
+              <td>
+                <font color="#ff6666"><i class="fa fa-copyright"></i> Javascript Calculator - V</font>
+              </td>
+            </tr>
+          </table>
         </div>
-        <div>
-            <button onclick="appendToResult('1')">1</button>
-            <button onclick="appendToResult('2')">2</button>
-            <button onclick="appendToResult('3')">3</button>
-            <button class="operator" onclick="appendToResult('-')">-</button>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-3">
+          <button id="reset" class="btn btn-danger inputKey" value="C">C</button>
         </div>
-        <div>
-            <button onclick="appendToResult('0')">0</button>
-            <button onclick="appendToResult('.')">.</button>
-            <button onclick="calculate()">=</button>
-            <button class="operator" onclick="appendToResult('+')">+</button>
+        <div class="col-xs-3">
+
         </div>
-        <div>
-            <button class="clear" onclick="clearResult()">C</button>
+        <div class="col-xs-3"></div>
+        <div class="col-xs-3">
+          <button id="backspace" class="btn btn-danger inputKey" value="CE">CE</button>
         </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-3">
+          <button class="btn btn-danger inputKey" value="7">7</button>
+        </div>
+        <div class="col-xs-3">
+          <button class="btn btn-danger inputKey" value="8">8</button>
+        </div>
+        <div class="col-xs-3">
+          <button class="btn btn-danger inputKey" value="9">9</button>
+        </div>
+        <div class="col-xs-3">
+          <button id="multiply" class="btn btn-danger inputKey" value="*"><i class="fa fa-times"></i></button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-3">
+          <button class="btn btn-danger inputKey" value="4">4</button>
+        </div>
+        <div class="col-xs-3">
+          <button class="btn btn-danger inputKey" value="5">5</button>
+        </div>
+        <div class="col-xs-3">
+          <button class="btn btn-danger inputKey" value="6">6</button>
+        </div>
+        <div class="col-xs-3">
+          <button id="subtract" class="btn btn-danger inputKey " value="-"> <i class="fa fa-minus"></i></button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-3">
+          <button class="btn btn-danger inputKey" value="1">1</button>
+        </div>
+        <div class="col-xs-3">
+          <button class="btn btn-danger inputKey" value="2">2</button>
+        </div>
+        <div class="col-xs-3">
+          <button class="btn btn-danger inputKey" value="3">3</button>
+        </div>
+        <div class="col-xs-3">
+          <button id="addition" class="btn btn-danger inputKey " value="+"> <i class="fa fa-plus"></i></button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-3">
+          <button id="equalsTo" class="btn btn-danger inputKey " value="EQ"><i class="fa fa-pause fa-rotate-90"></i></button>
+        </div>
+        <div class="col-xs-3">
+          <button class="btn btn-danger inputKey" value="0">0</button>
+        </div>
+        <div class="col-xs-3">
+          <button id="division" class="btn btn-danger inputKey " value="/">/</button>
+        </div>
+        <div class="col-xs-3">
+          <button id="modulus" class="btn btn-danger inputKey " value="%"> <i class="fa fa-percent"></i></button>
+        </div>
+      </div>
+
+
     </div>
+    <div class="col-xs-4"></div>
+  </div>
+
+  <br>
+
 </div>
-    <script>
-        function appendToResult(value) {
-            document.getElementById('result').value += value;
-        }
 
-        function calculate() {
-            var result = eval(document.getElementById('result').value);
-            document.getElementById('result').value = result;
-        }
+<script>
+    operators = ['+', '-', '/', '*', '%'];
+nonfunctional = ['C', 'CE'];
 
-        function clearResult() {
-            document.getElementById('result').value = '';
-        }
-    </script>
+$(document).ready(function() {
+
+  //Subtract button click
+  $('.inputKey').click(function() {
+    calcLogic(this.value);
+  });
+
+  function calcLogic(pressedButtonVal) {
+    var currScrValue = $('#screenInput').val();
+    //If the first keypress is a operator dont allow it
+    var isNotAnOperator = $.inArray(pressedButtonVal, operators);
+    var isNotNonFunctional = $.inArray(pressedButtonVal, nonfunctional);
+  
+    //No double operators press allowed
+    var isPreviousKeyAOperator = $.inArray(currScrValue.substr(currScrValue.length - 1), operators);
+    if(isNotAnOperator>=0 && isPreviousKeyAOperator >=0){
+      return;
+    }
+    if (currScrValue === '' && isNotAnOperator < 0 && isNotNonFunctional < 0) {
+      $('#screenInput').val(currScrValue + pressedButtonVal);
+    } else if ('CE' === pressedButtonVal) {
+      backspace();
+    } else if ('C' === pressedButtonVal) {
+      $('#screenInput').val('');
+    }  else if ('EQ' === pressedButtonVal) {
+     $('#screenInput').val(math.eval( $('#screenInput').val()));
+    } else if (isNotNonFunctional < 0) {
+      $('#screenInput').val(currScrValue + pressedButtonVal);
+    } 
+  }
+
+  //Remove character one by one from right
+  function backspace() {
+    var temp = $('#screenInput').val();
+    $('#screenInput').val(temp.substring(0, temp.length - 1));
+  }
+
+});
+</script>
 </body>
 </html>
