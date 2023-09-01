@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  overflow-y: scroll;
+}
+body {
+	background-color: #d3d3d3;
+  font-family: 'Titillium Web', sans-serif;
+  margin:0;
+  text-align: center;
+}
+header{
+	width:100%;
+	height:70px;
+	background:royalblue;
+	padding-top: 12px;
+}
+h1,h2{
+	margin:0;
+	padding: 0;
+	color:#fff;
+	font-family: 'Montserrat', sans-serif;
+	letter-spacing: 3px;
+	text-align: center;
+}
+.container{
+	width:600px;
+	min-height: 250px;
+	background: rgba(19, 35, 47, 0.9);
+	padding: 30px;
+	position: absolute;
+	left:50%;
+	margin-left: -300px;
+	top:50%;
+	margin-top: -100px;
+	color:#fff;
+	text-align: left;
+}
+.container header{
+	width:600px;
+	height:60px;
+	background:#1ab188;
+	position: relative;
+	left:-30px;
+	top:-30px;
+}
+#quiz{
+	margin-top: -10px
+}
+#questions{
+	font-size: 20px;
+	font-family: 'Montserrat', sans-serif;
+	font-weight: bold;
+	width:500px;
+
+}
+
+
+label{
+	display: block;
+	margin-bottom: 15px;
+	cursor: pointer;
+	width:400px;
+}
+
+input{
+	float: left;
+}
+.option span{
+	display: block;
+	margin-left: 16px;
+
+}
+
+#feedback{
+	display: none
+}
+#feedback h2{
+	color:darkorange;
+}
+#feedback p{
+	font-size: 18px
+}
+#feedback button{
+	border: none;
+	background:#1ab188;
+	padding: 5px 10px;
+	color:#fff;
+	font-size: 18px;
+	cursor: pointer;
+	border-right: 3px;
+	margin-right: 10px
+}
+#feedback button:hover{
+	background:#179b77;
+}
+.padding{
+	padding-left: 10px
+}
