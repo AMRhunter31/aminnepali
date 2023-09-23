@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Playlist</title>
+    <style>
+        .video-block {
+            display: inline-block;
+            margin: 10px;
+            text-align: center;
+        }
+        .video-block img {
+            max-width: 100%;
+            height: auto;
+        }
+        .video-name {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Video Playlist</h1>
+    <div id="videoList">
+        <!-- Video 1 -->
+        <div class="video-block">
+            <a class="video-link" href="videos/video1.mp4">
+                <img src="thumbnails/video1.jpg" alt="Video 1 Thumbnail">
+            </a>
+            <p class="video-name">Video 1</p>
+        </div>
+
+        <!-- Video 2 -->
+        <div class="video-block">
+            <a class="video-link" href="videos/video2.mp4">
+                <img src="thumbnails/video2.jpg" alt="Video 2 Thumbnail">
+            </a>
+            <p class="video-name">Video 2</p>
+        </div>
+
+        <!-- Add more videos -->
+    </div>
+
+    <div id="videoPlayer">
+        <video id="customVideo" controls>
+            <source src="" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div id="controls">
+            <button id="backward">Backward 10s</button>
+            <button id="playPause">Play</button>
+            <button id="forward">Forward 10s</button>
+            <a id="downloadLink" style="display: none;" download>Download</a>
+        </div>
+    </div>
+
+    <script>
+        const videoList = document.getElementById('videoList');
+        const customVideo = document.getElementById('customVideo');
+        const playPauseButton = document.getElementById('playPause');
+        const backwardButton = document.getElementById('backward');
+        const forwardButton = document.getElementById('forward');
+        const downloadLink = document.getElementById('downloadLink');
+
+        let currentVideoIndex = -1;
+        const videos = [
+            'videos/video1.mp4',
+            'videos/video2.mp4',
+            // Add more video URLs here
+        ];
+
+        function playVideo(index) {
+            if (index >= 0 && index < videos.length) {
+                customVideo.src = videos[index];
+                customVideo.load();
+                customVideo.play();
+                currentVideoIndex = index;
+                updateDownloadLink(videos[index]);
+            }
+        }
+
+        function updateDownloadLink(videoURL) {
+            downloadLink.href = videoURL;
+            downloadLink.style.display = 'block';
+        }
+
+        playPauseButton.addEventListener('click', function () {
+            if (customVideo.paused || customVideo.ended) {
+                customVideo.play();
+                playPauseButton.textContent = 'Pause';
+            } else {
+                customVideo.pause();
+                playPauseButton.textContent = 'Play';
+            }
+        });
+
+        backwardButton.addEventListener('click', function () {
+            if (currentVideoIndex >= 0) {
+                customVideo.currentTime -= 10;
+            }
+        });
+
+        forwardButton.addEventListener('click', function () {
+            if (currentVideoIndex >= 0) {
+                customVideo.currentTime += 10;
+            }
+        });
+
+        videoList.addEventListener('click', function (e) {
+            if (e.target.classList.contains('video-link')) {
+                e.preventDefault();
+                const index = Array.from(videoList.children).indexOf(e.target.parentElement);
+                playVideo(index);
+            }
+        });
+    </script>
+</body>
+</html>
