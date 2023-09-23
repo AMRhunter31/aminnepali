@@ -1,32 +1,349 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Student Search</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Search</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 20px;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .search-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .search-container input[type="text"] {
+            padding: 10px;
+            width: 70%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .search-container button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007BFF;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        .student-card {
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+            margin-top: 20px;
+            padding: 20px;
+        }
+
+        .student-card img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 2px solid #007BFF;
+            margin-right: 20px;
+            float: left;
+        }
+
+        .details {
+            text-align: left;
+            margin-top: 20px;
+        }
+
+        .details p {
+            margin: 5px 0;
+        }
+
+        .not-found {
+            font-size: 18px;
+            color: #f00;
+        }
+    </style>
 </head>
 <body>
-  <h1>Student Search</h1>
-  <div class="search-container">
-    <input type="text" id="rollNumber" placeholder="Enter Roll Number">
-   <style>
+    <div class="header">
+        <h1>Student Search</h1>
+    </div>
+    <div class="container">
+        <div class="search-container">
+            <input type="text" id="rollNumber" placeholder="Enter Roll Number">
+            <button onclick="searchStudent()">Search</button>
+        </div>
+        <div class="student-card" id="studentCard"></div>
+    </div>
 
-      .goback{
-        margin-left: 10px;
-      }
-
-      .goback:hover{
-        background-color: #f50d0d;
-        
-      }
-      
-    </style>
-    <button onclick="searchStudent()">Search</button><a class="aherf" href="../../index.html"><button class="goback">Go Back</button></a>
-  </div>
-  <center>
-     <div style="width: fit-content;" class="student-card" id="studentCard"></div>
-  
-  </center>
  
-  <script src="script.js"></script>
+  <script>
+    var studentData = [
+    {
+      rollNumber: 1,
+      name: "Anu Bhandari",
+      address: "Sundarharaincha,Biratchowk",
+      phoneNumber: "98xxxxxxxx "
+    },
+    {
+      rollNumber: 2,
+      name: "Sugam Pokhrel",
+      address: "Bhairahawa ",
+      phoneNumber: "98xxxxxxxx"
+    },
+    {
+      rollNumber: 3,
+      name: "Aashutosh Khatiwada",
+      address: "Address of Student ",
+      phoneNumber: "98xxxxxxxx "
+    },
+    {
+      rollNumber: 4,
+      name: "abhishek khawas ",
+      address: "Address of Student ",
+      phoneNumber: "98xxxxxxxx "
+    },
+    {
+      rollNumber: 5,
+      name: "data not exist ",
+      address: "data not exist ",
+      phoneNumber: "98xxxxxxxx "
+    },
+    {
+      rollNumber: 6,
+      name: "Student ",
+      address: "Address of Student ",
+      phoneNumber: "98xxxxxxxx"
+    },
+    {
+      rollNumber: 7,
+      name: "Aliza Shrestha",
+      address: "Address of Student ",
+      phoneNumber: "98xxxxxxxx "
+    },
+    {
+      rollNumber: 8,
+      name: "Puja Shah ",
+      address: "Address of Student ",
+      phoneNumber: "98xxxxxxxx "
+    },
+    {
+      rollNumber: 9,
+      name: "Bandika Poudel ",
+      address: "Bhaunne",
+      phoneNumber: "98xxxxxxxx "
+    },
+    {
+      rollNumber: 10,
+      name: "Aaswasan Khadka ",
+      address: "Address of Student ",
+      phoneNumber: "98xxxxxxxx  "
+    },
+    {
+      rollNumber: 11,
+      name: "data not exist ",
+      address: "data not exist",
+      phoneNumber: "Phone Number  "
+    },
+    {
+      rollNumber: 12,
+      name: "Nirajan Subedi ",
+      address: "data not exist ",
+      phoneNumber: "98xxxxxxxx "
+    },
+    {
+      rollNumber: 13,
+      name: "Indira Baniya ",
+      address: "Nalbari ",
+      phoneNumber: "98xxxxxxxx "
+    },
+    {
+      rollNumber: 14,
+      name: "data not exist ",
+      address: "data not exist ",
+      phoneNumber: "data not exist "
+    },
+    {
+      rollNumber: 15,
+      name: "sujan khadka ",
+      address: "data not exist ",
+      phoneNumber: "98xxxxxxxx "
+    },
+    {
+      rollNumber: 16,
+      name: "Asish Ojha ",
+      address: "data not exist ",
+      phoneNumber: "98xxxxxxxx "
+    },
+    {
+      rollNumber: 17,
+      name: "Simran Tamang ",
+      address: "data not exist ",
+      phoneNumber: "98xxxxxxxx "
+    },
+    {
+      rollNumber: 18,
+      name: "Darpan Limbu",
+      address: "Sankhuwasabha",
+      phoneNumber: "9842221301"
+    },
+    {
+      rollNumber: 19,
+      name: "Ayush Thapa ",
+      address: "Address of Student ",
+      phoneNumber: "Phone Number of Student "
+    },
+    {
+      rollNumber: 20,
+      name: "Subash Giri",
+      address: "Bhojpur",
+      phoneNumber: "9824997755"
+    },
+    {
+      rollNumber: 21,
+      name: "Shankar Khawas ",
+      address: "Address of Student ",
+      phoneNumber: "Phone Number of Student "
+    },
+    {
+      rollNumber: 22,
+      name: "Amin Nepali",
+      address: "Belbari",
+      phoneNumber: "9811003628"
+    },
+    {
+      rollNumber: 23,
+      name: "Nikhil Poudel ",
+      address: "data not exist ",
+      phoneNumber: "98xxxxxxxxx"
+    },
+    {
+      rollNumber: 24,
+      name: "data not exist ",
+      address: "data not exist ",
+      phoneNumber: "data not exist "
+    },
+    {
+      rollNumber: 25,
+      name: "data not exist ",
+      address: "data not exist ",
+      phoneNumber: "data not exist "
+    },
+    {
+      rollNumber: 26,
+      name: "data not exist ",
+      address: "data not exist ",
+      phoneNumber: "data not exist "
+    },
+
+    {
+      rollNumber: 27,
+      name: "Gayatri Bhagat ",
+      address: "Kaseni ",
+      phoneNumber: "9814331944 "
+    },
+    {
+      rollNumber: 28,
+      name: "Student ",
+      address: "data not exist ",
+      phoneNumber: "data not exist "
+    },
+    {
+      rollNumber: 29,
+      name: "Ajay  ",
+      address: "data not exist ",
+      phoneNumber: "data not exist "
+    },
+    {
+      rollNumber: 30,
+      name: "kamalmani Dahal ",
+      address: "data not exist",
+      phoneNumber: "data not exist "
+    },
+    {
+      rollNumber: 31,
+      name: "data not exist ",
+      address: "data not exist ",
+      phoneNumber: "data not exist "
+    },
+    {
+      rollNumber: 32,
+      name: "data not exist ",
+      address: "Address of Student ",
+      phoneNumber: "data not exist "
+    },
+    // Add the remaining student data here
+  ];
+  
+  function searchStudent() {
+    var rollNumber = parseInt(document.getElementById("rollNumber").value);
+    var studentCard = document.getElementById("studentCard");
+    studentCard.innerHTML = "";
+
+    var student = studentData.find(function(student) {
+      return student.rollNumber === rollNumber;
+    });
+
+    if (student) {
+      var imgPath = "images/" + rollNumber + ".jpg";
+      var name = student.name;
+      var address = student.address;
+      var phoneNumber = student.phoneNumber;
+
+      var img = document.createElement("img");
+      img.src = imgPath;
+      
+      var details = document.createElement("div");
+      details.classList.add("details");
+      
+      var nameParagraph = document.createElement("p");
+      nameParagraph.innerHTML = "<strong>Name:</strong> " + name;
+      details.appendChild(nameParagraph);
+      
+      var addressParagraph = document.createElement("p");
+      addressParagraph.innerHTML = "<strong>Address:</strong> " + address;
+      details.appendChild(addressParagraph);
+      
+      var phoneNumberParagraph = document.createElement("p");
+      phoneNumberParagraph.innerHTML = "<strong>Phone Number:</strong> " + phoneNumber;
+      details.appendChild(phoneNumberParagraph);
+      
+      studentCard.appendChild(img);
+      studentCard.appendChild(details);
+    } else {
+      var notFoundMsg = document.createElement("p");
+      notFoundMsg.innerHTML = "Student not found!";
+      studentCard.appendChild(notFoundMsg);
+    }
+  }
+  </script>
 </body>
 </html>
