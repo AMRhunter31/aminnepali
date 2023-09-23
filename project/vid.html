@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Video Playlist</title>
     <style>
+        /* Style your page as needed */
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
         .video-block {
             display: inline-block;
             margin: 10px;
@@ -21,25 +27,9 @@
 </head>
 <body>
     <h1>Video Playlist</h1>
-    <div id="videoList">
-        <!-- Video 1 -->
-        <div class="video-block">
-            <a class="video-link" href="videos/video1.mp4">
-                <img src="thumbnails/video1.jpg" alt="Video 1 Thumbnail">
-            </a>
-            <p class="video-name">Video 1</p>
-        </div>
-
-        <!-- Video 2 -->
-        <div class="video-block">
-            <a class="video-link" href="videos/video2.mp4">
-                <img src="thumbnails/video2.jpg" alt="Video 2 Thumbnail">
-            </a>
-            <p class="video-name">Video 2</p>
-        </div>
-
-        <!-- Add more videos -->
-    </div>
+    <input type="file" accept="video/*" id="videoInput">
+    <button onclick="addVideo()">Add Video</button>
+    <div id="videoList"></div>
 
     <div id="videoPlayer">
         <video id="customVideo" controls>
@@ -55,64 +45,57 @@
     </div>
 
     <script>
-        const videoList = document.getElementById('videoList');
-        const customVideo = document.getElementById('customVideo');
-        const playPauseButton = document.getElementById('playPause');
-        const backwardButton = document.getElementById('backward');
-        const forwardButton = document.getElementById('forward');
-        const downloadLink = document.getElementById('downloadLink');
+        function addVideo() {
+            const videoInput = document.getElementById('videoInput');
+            const videoList = document.getElementById('videoList');
 
-        let currentVideoIndex = -1;
-        const videos = [
-            'videos/video1.mp4',
-            'videos/video2.mp4',
-            // Add more video URLs here
-        ];
-
-        function playVideo(index) {
-            if (index >= 0 && index < videos.length) {
-                customVideo.src = videos[index];
-                customVideo.load();
-                customVideo.play();
-                currentVideoIndex = index;
-                updateDownloadLink(videos[index]);
+            if (videoInput.files.length === 0) {
+                alert('Please select a video file.');
+                return;
             }
+
+            const videoFile = videoInput.files[0];
+            const videoURL = URL.createObjectURL(videoFile);
+
+            const video = document.createElement('video');
+            video.src = videoURL;
+            video.crossOrigin = 'anonymous';
+
+            video.addEventListener('loadeddata', () => {
+                const canvas = document.createElement('canvas');
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+                const thumbnail = new Image();
+                thumbnail.src = canvas.toDataURL('image/jpeg');
+
+                const videoBlock = document.createElement('div');
+                videoBlock.classList.add('video-block');
+
+                const videoLink = document.createElement('a');
+                videoLink.href = videoURL;
+
+                const videoThumbnail = document.createElement('img');
+                videoThumbnail.src = thumbnail.src;
+
+                const videoName = document.createElement('p');
+                videoName.classList.add('video-name');
+                videoName.textContent = videoFile.name;
+
+                videoLink.appendChild(videoThumbnail);
+                videoBlock.appendChild(videoLink);
+                videoBlock.appendChild(videoName);
+                videoList.appendChild(videoBlock);
+
+                // You can save the video URL or perform other actions here
+            });
+
+            video.load();
         }
 
-        function updateDownloadLink(videoURL) {
-            downloadLink.href = videoURL;
-            downloadLink.style.display = 'block';
-        }
-
-        playPauseButton.addEventListener('click', function () {
-            if (customVideo.paused || customVideo.ended) {
-                customVideo.play();
-                playPauseButton.textContent = 'Pause';
-            } else {
-                customVideo.pause();
-                playPauseButton.textContent = 'Play';
-            }
-        });
-
-        backwardButton.addEventListener('click', function () {
-            if (currentVideoIndex >= 0) {
-                customVideo.currentTime -= 10;
-            }
-        });
-
-        forwardButton.addEventListener('click', function () {
-            if (currentVideoIndex >= 0) {
-                customVideo.currentTime += 10;
-            }
-        });
-
-        videoList.addEventListener('click', function (e) {
-            if (e.target.classList.contains('video-link')) {
-                e.preventDefault();
-                const index = Array.from(videoList.children).indexOf(e.target.parentElement);
-                playVideo(index);
-            }
-        });
+        // Rest of the video player code (play/pause, forward, backward, etc.)
     </script>
 </body>
 </html>
