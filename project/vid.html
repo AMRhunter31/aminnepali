@@ -4,31 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Video Playlist</title>
-    <style>
-        /* Style your page as needed */
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 20px;
-        }
-        .video-block {
-            display: inline-block;
-            margin: 10px;
-            text-align: center;
-        }
-        .video-block img {
-            max-width: 100%;
-            height: auto;
-        }
-        .video-name {
-            font-weight: bold;
-        }
-    </style>
 </head>
 <body>
     <h1>Video Playlist</h1>
-    <input type="file" accept="video/*" id="videoInput">
-    <button onclick="addVideo()">Add Video</button>
     <div id="videoList"></div>
 
     <div id="videoPlayer">
@@ -36,66 +14,40 @@
             <source src="" type="video/mp4">
             Your browser does not support the video tag.
         </video>
-        <div id="controls">
-            <button id="backward">Backward 10s</button>
-            <button id="playPause">Play</button>
-            <button id="forward">Forward 10s</button>
-            <a id="downloadLink" style="display: none;" download>Download</a>
-        </div>
     </div>
 
     <script>
-        function addVideo() {
-            const videoInput = document.getElementById('videoInput');
-            const videoList = document.getElementById('videoList');
+        const videoList = document.getElementById('videoList');
+        const customVideo = document.getElementById('customVideo');
 
-            if (videoInput.files.length === 0) {
-                alert('Please select a video file.');
-                return;
+        // Define your video files and their names
+        const videoFiles = [
+            { name: 'Video 1', file: 'videos/video1.mp4' },
+            { name: 'Video 2', file: 'videos/video2.mp4' },
+            // Add more video objects with names and file paths
+        ];
+
+        // Function to play selected video
+        function playVideo(index) {
+            if (index >= 0 && index < videoFiles.length) {
+                const video = videoFiles[index];
+                customVideo.src = video.file;
+                customVideo.load();
+                customVideo.play();
             }
-
-            const videoFile = videoInput.files[0];
-            const videoURL = URL.createObjectURL(videoFile);
-
-            const video = document.createElement('video');
-            video.src = videoURL;
-            video.crossOrigin = 'anonymous';
-
-            video.addEventListener('loadeddata', () => {
-                const canvas = document.createElement('canvas');
-                canvas.width = video.videoWidth;
-                canvas.height = video.videoHeight;
-                const ctx = canvas.getContext('2d');
-                ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-
-                const thumbnail = new Image();
-                thumbnail.src = canvas.toDataURL('image/jpeg');
-
-                const videoBlock = document.createElement('div');
-                videoBlock.classList.add('video-block');
-
-                const videoLink = document.createElement('a');
-                videoLink.href = videoURL;
-
-                const videoThumbnail = document.createElement('img');
-                videoThumbnail.src = thumbnail.src;
-
-                const videoName = document.createElement('p');
-                videoName.classList.add('video-name');
-                videoName.textContent = videoFile.name;
-
-                videoLink.appendChild(videoThumbnail);
-                videoBlock.appendChild(videoLink);
-                videoBlock.appendChild(videoName);
-                videoList.appendChild(videoBlock);
-
-                // You can save the video URL or perform other actions here
-            });
-
-            video.load();
         }
 
-        // Rest of the video player code (play/pause, forward, backward, etc.)
+        // Generate video playlist
+        videoFiles.forEach((video, index) => {
+            const videoItem = document.createElement('div');
+            videoItem.innerHTML = `<a href="#" onclick="playVideo(${index}); return false;">${video.name}</a>`;
+            videoList.appendChild(videoItem);
+        });
+
+        // Play the first video by default
+        if (videoFiles.length > 0) {
+            playVideo(0);
+        }
     </script>
 </body>
 </html>
