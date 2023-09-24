@@ -4,69 +4,119 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Send File</title>
-    <!-- Include Pusher JavaScript library -->
-    <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
     <style>
-        /* Your CSS styles for send.html here */
         body {
             font-family: Arial, sans-serif;
             background-color: #f0f0f0;
-            text-align: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
         }
-        .container {
-            max-width: 400px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
+
         h1 {
-            font-size: 24px;
             margin-bottom: 20px;
         }
-        label {
-            display: block;
-            font-weight: bold;
-            margin-top: 10px;
-        }
+
         input[type="file"] {
             display: none;
         }
-        button {
+
+        label {
             background-color: #3498db;
-            color: #fff;
-            border: none;
+            color: white;
             padding: 10px 20px;
             border-radius: 5px;
             cursor: pointer;
-            margin-top: 20px;
+            transition: background-color 0.3s ease;
         }
-        button:hover {
+
+        label:hover {
             background-color: #2980b9;
         }
+
+        #generateCode {
+            margin-top: 20px;
+            background-color: #2ecc71;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #generateCode:hover {
+            background-color: #27ae60;
+        }
+
+        #codeDisplay {
+            display: none;
+            margin-top: 20px;
+        }
     </style>
+    <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
 </head>
 <body>
-    <div class="container">
-        <h1>Send File</h1>
-        <label for="fileInput">Choose a File:</label>
-        <input type="file" id="fileInput" accept=".txt, .pdf, .doc">
-        <button id="sendButton">Send</button>
-        <div id="status"></div>
+    <h1>Send File</h1>
+    <label for="fileInput">Choose File</label>
+    <input type="file" id="fileInput" accept=".txt,.pdf,.doc">
+    <button id="generateCode" style="display: none;">Generate Code</button>
+    <div id="codeDisplay">
+        <p><strong>Generated Code:</strong> <span id="code"></span></p>
     </div>
 
     <script>
-        // Initialize Pusher with your app key and cluster
-        var pusher = new Pusher('5196d4a621bbfa384888', {
-  cluster: 'ap2'
-});
+        const app_id = "1676291";
+        const key = "5196d4a621bbfa384888";
+        const secret = "3b4ace6044778bc6cea3";
+        const cluster = "ap2";
 
+        document.getElementById('fileInput').addEventListener('change', function() {
+            const fileInput = document.getElementById('fileInput');
+            const codeDisplay = document.getElementById('codeDisplay');
+            const generateCodeButton = document.getElementById('generateCode');
+            const code = Math.floor(Math.random() * 900000 + 100000); // Generate a 6-digit code
 
-        // Your JavaScript code for send.html, including Pusher integration
-        document.getElementById('sendButton').addEventListener('click', function() {
-            var channel = pusher.subscribe('file-sharing');
-            channel.trigger('send-file', { message: 'File sent!' });
+            codeDisplay.style.display = 'block';
+            document.getElementById('code').textContent = code;
+            generateCodeButton.style.display = 'block';
+
+            generateCodeButton.addEventListener('click', function() {
+                // Send the code to the receiving device via WebSocket
+                const socket = new WebSocket(`wss://${cluster}.pusher.com/app/${app_id}`, {
+                    key: `${key}`,
+                    secret: `${secret}`
+                });
+
+                socket.onopen = function() {
+                    socket.send(code.toString());
+                };
+
+                socket.onclose = function(event) {
+                    if (event.code === 1000) {
+                        alert('File sent successfully.');
+                    } else {
+                        alert('Failed to send file.');
+                    }
+                };
+
+                fileInput.addEventListener('change', function() {
+                    const file = fileInput.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+
+                        reader.onload = function(e) {
+                            socket.send(e.target.result);
+                        };
+
+                        reader.readAsDataURL(file);
+                    }
+                });
+            });
         });
     </script>
 </body>

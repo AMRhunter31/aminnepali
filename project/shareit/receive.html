@@ -66,7 +66,6 @@
             background-color: #2980b9;
         }
     </style>
-    <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
 </head>
 <body>
     <h1>Receive File</h1>
@@ -75,20 +74,23 @@
     <button id="receive">Receive</button>
     <a id="downloadLink" style="display: none;" download="received_file">Download File</a>
 
+    
+       
     <script>
-
-
-
-var pusher = new Pusher('5196d4a621bbfa384888', {
-  cluster: 'ap2'
-});
+        const app_id = "1676291";
+        const key = "5196d4a621bbfa384888";
+        const secret = "3b4ace6044778bc6cea3";
+        const cluster = "ap2";
 
         document.getElementById('receive').addEventListener('click', function() {
             const codeInput = document.getElementById('codeInput');
             const downloadLink = document.getElementById('downloadLink');
 
-            // Establish a WebSocket connection to the same server as the sender
-            const socket = new WebSocket('ws://your_server_url'); // Replace with your WebSocket server URL
+            // Establish a WebSocket connection to the sender's server
+            const socket = new WebSocket(`wss://${cluster}.pusher.com/app/${app_id}`, {
+                key: `${key}`,
+                secret: `${secret}`
+            });
 
             socket.onmessage = function(event) {
                 if (codeInput.value === event.data) {
@@ -111,5 +113,6 @@ var pusher = new Pusher('5196d4a621bbfa384888', {
             });
         });
     </script>
+    
 </body>
 </html>
