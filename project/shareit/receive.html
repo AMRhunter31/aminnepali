@@ -82,12 +82,20 @@
         const secret = "3b4ace6044778bc6cea3";
         const cluster = "ap2";
 
+        let socket; // Declare the socket variable outside the event listener
+
         document.getElementById('receive').addEventListener('click', function() {
             const codeInput = document.getElementById('codeInput');
             const downloadLink = document.getElementById('downloadLink');
 
+            // Check if a WebSocket connection is already established
+            if (socket && socket.readyState === WebSocket.OPEN) {
+                alert('A connection is already established. Please wait.');
+                return;
+            }
+
             // Establish a WebSocket connection to the sender's server
-            const socket = new WebSocket(`wss://${cluster}.pusher.com/app/${app_id}`, {
+            socket = new WebSocket(`wss://${cluster}.pusher.com/app/${app_id}`, {
                 key: `${key}`,
                 secret: `${secret}`
             });
@@ -113,6 +121,5 @@
             });
         });
     </script>
-    
 </body>
 </html>
