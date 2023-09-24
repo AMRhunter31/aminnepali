@@ -66,6 +66,7 @@
             background-color: #2980b9;
         }
     </style>
+    <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
 </head>
 <body>
     <h1>Receive File</h1>
@@ -75,6 +76,13 @@
     <a id="downloadLink" style="display: none;" download="received_file">Download File</a>
 
     <script>
+
+
+
+var pusher = new Pusher('5196d4a621bbfa384888', {
+  cluster: 'ap2'
+});
+
         document.getElementById('receive').addEventListener('click', function() {
             const codeInput = document.getElementById('codeInput');
             const downloadLink = document.getElementById('downloadLink');
