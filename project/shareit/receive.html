@@ -17,10 +17,9 @@
             // Get the stored code and file from localStorage
             const storedCode = localStorage.getItem('code');
             const storedFile = JSON.parse(localStorage.getItem('file'));
-
             if (enteredCode === storedCode && storedFile) {
     // Create a download link and trigger the download
-    const blob = new Blob([storedFile], { type: storedFile.type });
+    const blob = new Blob([storedFile], { type: storedFile.type }); // Set the correct file type
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
