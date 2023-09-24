@@ -3,33 +3,105 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>File Receive Page</title>
+    <title>Receive File</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        #receive {
+            margin-top: 20px;
+            background-color: #2ecc71;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #receive:hover {
+            background-color: #27ae60;
+        }
+
+        #downloadLink {
+            display: none;
+            margin-top: 20px;
+            font-size: 18px;
+            text-decoration: none;
+            background-color: #3498db;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #downloadLink:hover {
+            background-color: #2980b9;
+        }
+    </style>
 </head>
 <body>
-    <input type="text" id="codeInput" placeholder="Enter Code">
-    <button onclick="receiveFile()">Download File</button>
+    <h1>Receive File</h1>
+    <label for="codeInput">Enter Code:</label>
+    <input type="text" id="codeInput">
+    <button id="receive">Receive</button>
+    <a id="downloadLink" style="display: none;" download="received_file">Download File</a>
 
     <script>
-        function receiveFile() {
+         document.getElementById('receive').addEventListener('click', function() {
             const codeInput = document.getElementById('codeInput');
-            const enteredCode = codeInput.value;
-            
-            // Get the stored code and file from localStorage
-            const storedCode = localStorage.getItem('code');
-            const storedFile = JSON.parse(localStorage.getItem('file'));
-            if (enteredCode === storedCode && storedFile) {
-    // Create a download link and trigger the download
-    const blob = new Blob([storedFile], { type: storedFile.type }); // Set the correct file type
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = storedFile.name; // Set the download attribute to the file name
-    a.click();
-} else {
-    alert('Invalid code or no file available.');
-}
+            const downloadLink = document.getElementById('downloadLink');
 
-        }
+            // Establish a WebSocket connection to the same server as the sender
+            const socket = new WebSocket('ws://your_server_url'); // Replace with your WebSocket server URL
+
+            socket.onmessage = function(event) {
+                if (codeInput.value === event.data) {
+                    downloadLink.style.display = 'block';
+                } else {
+                    alert('Invalid code. Please try again.');
+                }
+            };
+
+            socket.onclose = function(event) {
+                if (event.code === 1000) {
+                    // File received successfully
+                } else {
+                    alert('Failed to receive file.');
+                }
+            };
+
+            downloadLink.addEventListener('click', function() {
+                socket.send('download');
+            });
+        });
     </script>
 </body>
 </html>

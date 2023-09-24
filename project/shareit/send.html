@@ -3,32 +3,108 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>File Send Page</title>
+    <title>Send File</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        label {
+            background-color: #3498db;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        label:hover {
+            background-color: #2980b9;
+        }
+
+        #generateCode {
+            margin-top: 20px;
+            background-color: #2ecc71;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #generateCode:hover {
+            background-color: #27ae60;
+        }
+
+        #codeDisplay {
+            display: none;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
-    <input type="file" id="fileInput">
-    <button onclick="sendFile()">Send File</button>
-    
-    <p>Generated Code: <span id="code"></span></p>
+    <h1>Send File</h1>
+    <label for="fileInput">Choose File</label>
+    <input type="file" id="fileInput" accept=".txt,.pdf,.doc">
+    <button id="generateCode">Generate Code</button>
+    <div id="codeDisplay">
+        <p><strong>Generated Code:</strong> <span id="code"></span></p>
+    </div>
 
     <script>
-        function sendFile() {
+        document.getElementById('generateCode').addEventListener('click', function() {
             const fileInput = document.getElementById('fileInput');
-            const file = fileInput.files[0];
+            const codeDisplay = document.getElementById('codeDisplay');
+            const code = Math.floor(Math.random() * 900000 + 100000); // Generate a 6-digit code
 
-            if (file) {
-                // Generate a random 6-digit code
-                const code = Math.floor(100000 + Math.random() * 900000);
-                
-                // Store the file and code in localStorage
-                localStorage.setItem('file', JSON.stringify(file));
-                localStorage.setItem('code', code);
+            codeDisplay.style.display = 'block';
+            document.getElementById('code').textContent = code;
 
-                document.getElementById('code').textContent = code;
-            } else {
-                alert('Please select a file to send.');
-            }
-        }
+            // Send the code to the receiving device via WebSocket
+            const socket = new WebSocket('ws://your_server_url'); // Replace with your WebSocket server URL
+
+            socket.onopen = function() {
+                socket.send(code.toString());
+            };
+
+            socket.onclose = function(event) {
+                if (event.code === 1000) {
+                    alert('File sent successfully.');
+                } else {
+                    alert('Failed to send file.');
+                }
+            };
+            
+            fileInput.addEventListener('change', function() {
+                const file = fileInput.files[0];
+                if (file) {
+                    const reader = new FileReader();
+
+                    reader.onload = function(e) {
+                        socket.send(e.target.result);
+                    };
+
+                    reader.readAsDataURL(file);
+                }
+            });
+        });
     </script>
 </body>
 </html>
