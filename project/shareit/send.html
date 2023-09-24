@@ -74,28 +74,28 @@
         const key = "5196d4a621bbfa384888";
         const secret = "3b4ace6044778bc6cea3";
         const cluster = "ap2";
-
+    
         document.getElementById('fileInput').addEventListener('change', function() {
             const fileInput = document.getElementById('fileInput');
             const codeDisplay = document.getElementById('codeDisplay');
             const generateCodeButton = document.getElementById('generateCode');
             const code = Math.floor(Math.random() * 900000 + 100000); // Generate a 6-digit code
-
+    
             codeDisplay.style.display = 'block';
             document.getElementById('code').textContent = code;
             generateCodeButton.style.display = 'block';
-
+    
             generateCodeButton.addEventListener('click', function() {
                 // Send the code to the receiving device via WebSocket
                 const socket = new WebSocket(`wss://${cluster}.pusher.com/app/${app_id}`, {
                     key: `${key}`,
                     secret: `${secret}`
                 });
-
+    
                 socket.onopen = function() {
                     socket.send(code.toString());
                 };
-
+    
                 socket.onclose = function(event) {
                     if (event.code === 1000) {
                         alert('File sent successfully.');
@@ -103,21 +103,40 @@
                         alert('Failed to send file.');
                     }
                 };
-
+    
                 fileInput.addEventListener('change', function() {
                     const file = fileInput.files[0];
                     if (file) {
                         const reader = new FileReader();
-
+    
                         reader.onload = function(e) {
                             socket.send(e.target.result);
                         };
-
+    
                         reader.readAsDataURL(file);
                     }
                 });
+    
+                // Add the code for handling the 'download' message here
+                socket.onmessage = function(event) {
+                    if (event.data === 'download') {
+                        // Handle the 'download' message by sending the file content
+                        const fileInput = document.getElementById('fileInput');
+                        const file = fileInput.files[0];
+                        if (file) {
+                            const reader = new FileReader();
+    
+                            reader.onload = function(e) {
+                                socket.send(e.target.result);
+                            };
+    
+                            reader.readAsDataURL(file);
+                        }
+                    }
+                };
             });
         });
     </script>
+    
 </body>
 </html>
