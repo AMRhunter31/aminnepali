@@ -2,7 +2,72 @@
 <html>
 <head>
     <title>User 2 Chat</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <style>
+        body {
+    background: linear-gradient(to bottom, #ff6b6b, #4ecdc4);
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.chat-container {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+}
+
+h1 {
+    color: #333;
+    font-size: 24px;
+}
+
+#chat-box {
+    max-height: 300px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-top: 20px;
+    text-align: left;
+}
+
+.message-input-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+input[type="text"] {
+    width: 70%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    background-color: #4ecdc4;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45b9b4;
+}
+
+/* Add more CSS styles as needed */
+
+    </style>
 </head>
 <body>
     <div class="chat-container">
@@ -16,6 +81,44 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+    <script >
+
+const pusher = new Pusher({
+    appId: '1676291',
+    key: '5196d4a621bbfa384888',
+    secret: '3b4ace6044778bc6cea3',
+    cluster: 'ap2',
+    encrypted: true
+});
+
+const channel = pusher.subscribe('chat');
+
+channel.bind('message', function(data) {
+    const chatBox = document.getElementById('chat-box');
+    chatBox.innerHTML += `<p>User ${data.user}: ${data.text}</p>`;
+    chatBox.scrollTop = chatBox.scrollHeight;
+});
+
+function sendMessage() {
+    const messageInput = document.getElementById('message-input');
+    const messageText = messageInput.value.trim();
+    
+    if (messageText !== '') {
+        const message = {
+            user: '2', // Replace with the user ID (1 for User 1, 2 for User 2)
+            text: messageText,
+        };
+
+        channel.trigger('message', message);
+
+        const chatBox = document.getElementById('chat-box');
+        chatBox.innerHTML += `<p>You: ${messageText}</p>`;
+        chatBox.scrollTop = chatBox.scrollHeight;
+
+        messageInput.value = ''; // Clear the input field
+    }
+}
+    </script>
 </body>
 </html>
