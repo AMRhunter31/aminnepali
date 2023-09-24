@@ -63,46 +63,50 @@
     <h1>Send File</h1>
     <label for="fileInput">Choose File</label>
     <input type="file" id="fileInput" accept=".txt,.pdf,.doc">
-    <button id="generateCode">Generate Code</button>
+    <button id="generateCode" style="display: none;">Generate Code</button>
     <div id="codeDisplay">
         <p><strong>Generated Code:</strong> <span id="code"></span></p>
     </div>
 
     <script>
-        document.getElementById('generateCode').addEventListener('click', function() {
+        document.getElementById('fileInput').addEventListener('change', function() {
             const fileInput = document.getElementById('fileInput');
             const codeDisplay = document.getElementById('codeDisplay');
+            const generateCodeButton = document.getElementById('generateCode');
             const code = Math.floor(Math.random() * 900000 + 100000); // Generate a 6-digit code
 
             codeDisplay.style.display = 'block';
             document.getElementById('code').textContent = code;
+            generateCodeButton.style.display = 'block';
 
-            // Send the code to the receiving device via WebSocket
-            const socket = new WebSocket('ws://your_server_url'); // Replace with your WebSocket server URL
+            generateCodeButton.addEventListener('click', function() {
+                // Send the code to the receiving device via WebSocket
+                const socket = new WebSocket('ws://your_server_url'); // Replace with your WebSocket server URL
 
-            socket.onopen = function() {
-                socket.send(code.toString());
-            };
+                socket.onopen = function() {
+                    socket.send(code.toString());
+                };
 
-            socket.onclose = function(event) {
-                if (event.code === 1000) {
-                    alert('File sent successfully.');
-                } else {
-                    alert('Failed to send file.');
-                }
-            };
-            
-            fileInput.addEventListener('change', function() {
-                const file = fileInput.files[0];
-                if (file) {
-                    const reader = new FileReader();
+                socket.onclose = function(event) {
+                    if (event.code === 1000) {
+                        alert('File sent successfully.');
+                    } else {
+                        alert('Failed to send file.');
+                    }
+                };
 
-                    reader.onload = function(e) {
-                        socket.send(e.target.result);
-                    };
+                fileInput.addEventListener('change', function() {
+                    const file = fileInput.files[0];
+                    if (file) {
+                        const reader = new FileReader();
 
-                    reader.readAsDataURL(file);
-                }
+                        reader.onload = function(e) {
+                            socket.send(e.target.result);
+                        };
+
+                        reader.readAsDataURL(file);
+                    }
+                });
             });
         });
     </script>
