@@ -1,22 +1,21 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Chat</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Chat</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="chat-container">
-        <h1>Chat</h1>
-        <div id="chat-box">
+        <div class="chat-box" id="chat-box">
             <!-- Chat messages will appear here -->
         </div>
-        <div class="message-input-container">
+        <div class="input-container">
             <input type="text" id="message-input" placeholder="Type your message">
             <button onclick="sendMessage()">Send</button>
         </div>
     </div>
-
-    <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
-    <script src="./script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
