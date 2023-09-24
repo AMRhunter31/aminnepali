@@ -6,7 +6,7 @@ const pusher = new Pusher({
     encrypted: true
 });
 
-const channel = pusher.subscribe('chat');
+const channel = pusher.subscribe('ameen shareonline'); // Use the correct channel name
 
 function getRandomColor() {
     const letters = '0123456789ABCDEF';

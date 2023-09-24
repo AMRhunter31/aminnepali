@@ -18,7 +18,7 @@
 
     <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
     <script>
-        const pusher = new Pusher({
+  const pusher = new Pusher({
     appId: '1676291',
     key: '1729bbaddaf906e43c7f',
     secret: '348a5b60c490de2856cc',
@@ -26,7 +26,7 @@
     encrypted: true
 });
 
-const channel = pusher.subscribe('chat');
+const channel = pusher.subscribe('ameen shareonline'); // Use the correct channel name
 
 function getRandomColor() {
     const letters = '0123456789ABCDEF';
@@ -52,7 +52,7 @@ function sendMessage() {
     
     if (messageText !== '') {
         const message = {
-            user: '2', // Replace with the user ID (1 for User 1, 2 for User 2, and so on)
+            user: '1', // Replace with the user ID (1 for User 1, 2 for User 2, and so on)
             text: messageText,
         };
 
