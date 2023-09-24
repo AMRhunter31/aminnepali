@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Send Page</title>
+</head>
+<body>
+    <input type="file" id="fileInput">
+    <button onclick="sendFile()">Send File</button>
+    
+    <p>Generated Code: <span id="code"></span></p>
+
+    <script>
+        function sendFile() {
+            const fileInput = document.getElementById('fileInput');
+            const file = fileInput.files[0];
+
+            if (file) {
+                // Generate a random 6-digit code
+                const code = Math.floor(100000 + Math.random() * 900000);
+                
+                // Store the file and code in localStorage
+                localStorage.setItem('file', JSON.stringify(file));
+                localStorage.setItem('code', code);
+
+                document.getElementById('code').textContent = code;
+            } else {
+                alert('Please select a file to send.');
+            }
+        }
+    </script>
+</body>
+</html>

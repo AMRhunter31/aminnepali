@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Receive Page</title>
+</head>
+<body>
+    <input type="text" id="codeInput" placeholder="Enter Code">
+    <button onclick="receiveFile()">Download File</button>
+
+    <script>
+        function receiveFile() {
+            const codeInput = document.getElementById('codeInput');
+            const enteredCode = codeInput.value;
+            
+            // Get the stored code and file from localStorage
+            const storedCode = localStorage.getItem('code');
+            const storedFile = JSON.parse(localStorage.getItem('file'));
+
+            if (enteredCode === storedCode && storedFile) {
+                // Create a download link and trigger the download
+                const blob = new Blob([storedFile], { type: storedFile.type });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = storedFile.name;
+                a.click();
+            } else {
+                alert('Invalid code or no file available.');
+            }
+        }
+    </script>
+</body>
+</html>
